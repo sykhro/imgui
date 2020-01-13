@@ -3719,7 +3719,6 @@ void ImGui::Shutdown()
     g.MenusIdSubmittedThisFrame.clear();
     g.InputTextState.ClearFreeMemory();
     g.InputTextDeactivatedState.ClearFreeMemory();
-    g.MultiSelectScopeWindow = NULL;
 
     g.SettingsWindows.clear();
     g.SettingsHandlers.clear();
@@ -12173,6 +12172,7 @@ void ImGui::NavInitRequestApplyResult()
         g.NavJustMovedToId = result->ID;
         g.NavJustMovedToFocusScopeId = result->FocusScopeId;
         g.NavJustMovedToKeyMods = 0;
+        g.NavJustMovedToHasSelectionData = (result->InFlags & ImGuiItemFlags_HasSelectionUserData) ? true : false;
     }
 
     // Apply result from previous navigation init request (will typically select the first item, unless SetItemDefaultFocus() has been called)
@@ -12429,6 +12429,7 @@ void ImGui::NavMoveRequestApplyResult()
         g.NavJustMovedToId = result->ID;
         g.NavJustMovedToFocusScopeId = result->FocusScopeId;
         g.NavJustMovedToKeyMods = g.NavMoveKeyMods;
+        g.NavJustMovedToHasSelectionData = (result->InFlags & ImGuiItemFlags_HasSelectionUserData) ? true : false;
     }
 
     // Apply new NavID/Focus
